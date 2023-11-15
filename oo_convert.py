@@ -48,6 +48,7 @@ def add_scale(freezing_point, boiling_point, name, initial = None, overwrite = F
     if initial in temperature_scales and not overwrite:
         print(f"scale not added, initial {initial} already in use")
         print(f"add again with overwrite=True to replace existing scale {temperature_scales[initial].name}")
+        return
     
     temperature_scales[initial] = Temperature_Scale(freezing_point, boiling_point, name)
     print(f"scale added successfully with initial {initial}")
