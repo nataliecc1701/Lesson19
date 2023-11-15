@@ -32,9 +32,9 @@ def convert_temp(from_scale, to_scale, temp):
     '''uses our handy data structures to convert a temperature from from_scale to to_scale'''
     
     # check to see that we have our scales
-    if not temperature_scales[from_scale]:
+    if from_scale not in temperature_scales:
         return f"unrecognized scale {from_scale}"
-    if not temperature_scales[to_scale]:
+    if to_scale not in temperature_scales:
         return f"unrecognized scale {to_scale}"
     
     # and then let the magic happen
@@ -75,9 +75,12 @@ while True:
         else:
             print('available commands: quit, convert, add. type "help [command]" for syntax')
     elif cmd[0] == "convert":
-        print (f"{cmd[3]} degrees {temperature_scales[cmd[1]].name} is " +
-               f"{round(convert_temp(cmd[1], cmd[2], float(cmd[3])), 2)} degrees " 
-               + f"{temperature_scales[cmd[2]].name}")
+        if cmd[1] in temperature_scales and cmd[2] in temperature_scales:
+            print (f"{cmd[3]} degrees {temperature_scales[cmd[1]].name} is " +
+                   f"{round(convert_temp(cmd[1], cmd[2], float(cmd[3])), 2)} degrees " 
+                   + f"{temperature_scales[cmd[2]].name}")
+        else:
+            print(convert_temp(cmd[1], cmd[2], cmd[3]))
     elif cmd[0] == "add":
         while len(cmd) < 6:
             cmd.append(None) # ugly kludge to avoid some errors
