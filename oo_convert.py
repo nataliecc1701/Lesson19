@@ -60,6 +60,8 @@ while True:
     if cmd[0] == "quit":
         break
     if cmd[0] == "help":
+        if len(cmd) == 1:
+            print('available commands: quit, convert, add. type "help [command]" for syntax')
         if cmd[1] == "quit":
             print("the 'quit' command ends the program and returns you to the console")
         elif cmd[1] == "convert":
